@@ -1,0 +1,122 @@
+<title>Grim Dawn item appraiser</title>
+<link href="style.css" rel="stylesheet"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta charset="utf-8" /> 
+<div id='character'>
+  <div>
+    <h3>Attributes</h3>
+    <div>Physique <input id='physique'/></div>
+    <div>Cunning <input id='cunning'/></div>
+    <div>Spirit <input id='spirit'/></div>
+    <div>Health <input id='health'/></div>
+    <div>Energy <input id='energy'/></div>
+    <h3>Combat stats</h3>
+    <div>Offensive ability<input id='offensive-ability'/></div>
+    <div>Critical chance<input id='crit-chance'/></div>
+    <div>Defensive ability<input id='defensive-ability'/></div>
+    <div>Damage per second<input id='damage-per-second'/></div>
+    <div>Armor rating<input id='armor-rating'/></div>
+    <h3>Resistances</h3>
+    <div>Fire<input id='fire-resistance'/></div>
+    <div>Cold<input id='cold-resistance'/></div>
+    <div>Lightning<input id='lightning-resistance'/></div>
+    <div>Poison<input id='poison-resistance'/></div>
+    <div>Pierce<input id='pierce-resistance'/></div>
+    <div>Bleed<input id='bleed-resistance'/></div>
+    <div>Vitality<input id='vitality-resistance'/></div>
+    <div>Aether<input id='aether-resistance'/></div>
+    <div>Stun<input id='stun-resistance'/></div>
+    <div>Chaos<input id='chaos-resistance'/></div>
+  </div>
+  <div>
+    <h3>Weapon damage</h3>
+    <div>Physical <input id='physical-damage'/></div>
+    <div>Pierce <input id='pierce-damage'/></div>
+    <div>Bleed <input id='bleed-damage'/></div>
+    <div>Trauma<input id='trauma-damage'/></div>
+    <div>Fire <input id='fire-damage'/></div>
+    <div>Cold<input id='cold-damage'/></div>
+    <div>Lightning<input id='lightning-damage'/></div>
+    <div>Acid<input id='acid-damage'/></div>
+    <div>Vitality<input id='vitality-damage'/></div>
+    <div>Aether<input id='aether-damage'/></div>
+    <div>Chaos<input id='chaos-damage'/></div>
+    <div>Burn<input id='burn-damage'/></div>
+    <div>Frotsburn<input id='frostburn-damage'/></div>
+    <div>Electrocute<input id='electrocute-damage'/></div>
+    <div>Poison<input id='poison-damage'/></div>
+    <div>Decay<input id='decay-damage'/></div>
+    <h3>Character</h3>
+    <div>Attacks per second<input id='attacks-per-second'/></div>
+    <div>Health regeneration<input id='health-regeneration'/></div>
+    <div>Energy regeneration<input id='energy-regeneration'/></div>
+  </div>
+  <div>
+    <h3>Physical</h3>
+    <div>Physical modifier<input id='physical-modifier'/></div>
+    <div>Pierce modifier<input id='pierce-modifier'/></div>
+    <div>Bleed modifier<input id='bleed-modifier'/></div>
+    <div>Trauma modifier<input id='trauma-modifier'/></div>
+    <h3>Magical</h3>
+    <div>Fire modifier<input id='fire-modifier'/></div>
+    <div>Cold modifier<input id='cold-modifier'/></div>
+    <div>Lightning modifier<input id='lightning-modifier'/></div>
+    <div>Acid modifier<input id='acid-modifier'/></div>
+    <div>Vitality modifier<input id='vitality-modifier'/></div>
+    <div>Aether modifier<input id='aether-modifier'/></div>
+    <div>Chaos modifier<input id='chaos-modifier'/></div>
+    <div>Burn modifier<input id='burn-modifier'/></div>
+    <div>Frotsburn modifier<input id='frostburn-modifier'/></div>
+    <div>Electrocute modifier<input id='electrocute-modifier'/></div>
+    <div>Poison modifier<input id='poison-modifier'/></div>
+    <div>Decay modifier<input id='decay-modifier'/></div>
+    <h3>Pets</h3>TODO
+    <!--div>Quantity<input id=''/></div>
+    <div>Pet health<input id=''/></div-->
+  </div>
+  <div>
+    <h3>Retaliation</h3>
+    <div>Physical retaliation<input id='physical-retaliation'/></div>
+    <div>Pierce retaliation<input id='pierce-retaliation'/></div>
+    <div>Bleed retaliation<input id='bleed-retaliation'/></div>
+    <div>Trauma retaliation<input id='trauma-retaliation'/></div>
+    <div>Fire retaliation<input id='fire-retaliation'/></div>
+    <div>Cold retaliation<input id='cold-retaliation'/></div>
+    <div>Lightning retaliation<input id='lightning-retaliation'/></div>
+    <div>Acid retaliation<input id='acid-retaliation'/></div>
+    <div>Vitality retaliation<input id='vitality-retaliation'/></div>
+    <div>Aether retaliation<input id='aether-retaliation'/></div>
+    <div>Chaos retaliation<input id='chaos-retaliation'/></div>
+    <div>Burn retaliation<input id='burn-retaliation'/></div>
+    <div>Frotsburn retaliation<input id='frostburn-retaliation'/></div>
+    <div>Electrocute retaliation<input id='electrocute-retaliation'/></div>
+    <div>Poison retaliation<input id='poison-retaliation'/></div>
+    <div>Decay retaliation<input id='decay-retaliation'/></div>
+  </div>
+</div>
+<button id='clear-stats'>Clear stats</button>
+<h2>Items</h2>
+<button id='new-item'>New item</button>
+<div id='items'>
+  <template id='property'>
+    <div class='property'>
+      <input type='checkbox' class='priority' title='Double weight'/>
+      <input class='value'/>
+      <select class='type'></select>
+      <button class='remove-property'>X</button>
+    </div>
+  </template>
+  <template id='item'>
+    <div class='item'>
+      <input class='name' placeholder='Item name'/>
+      <div class='properties'></div>
+      <div class='score'>Score: <span class='value'>?</span></div>
+      <button class='add-property'>Add property</button>
+      <button class='remove-item'>Remove item</button>
+    </div>
+  </template>
+</div>
+<script type='module'>
+  import * as appraiser from './src/appraiser.js'
+  appraiser.setup()
+</script>
