@@ -62,6 +62,7 @@ class Item{
     this.view.querySelector('button.remove-item').onclick=()=>this.remove()
     this.view.querySelector('button.add-property').onclick=()=>new Property(this)
     CONTAINER.appendChild(this.view)
+    new Property(this)
   }
   
   remove(){
@@ -73,10 +74,11 @@ class Item{
     this.score=0
     for(let p of this.properties) 
       if(!p.calculate()){
-        this.score='?'
+        this.score=false
         break
       }
-    this.view.querySelector('.score .value').innerHTML=Math.round(this.score)
+    this.view.querySelector('.score .value').innerHTML=
+      this.score===false?'?':Math.round(this.score)
   }
 }
 
