@@ -96,13 +96,12 @@
 </div>
 <button id='clear-stats'>Clear stats</button>
 <h2>Items</h2>
-<button id='new-item'>New item</button>
 <div id='items'>
   <template id='property'>
     <div class='property'>
-      <input type='checkbox' class='priority' title='Double weight'/>
       <input class='value'/>
       <select class='type'></select>
+      <input type='checkbox' class='priority' title='Double weight'/>
       <button class='remove-property'>X</button>
     </div>
   </template>
@@ -116,6 +115,7 @@
     </div>
   </template>
 </div>
+<button id='new-item'>New item</button>
 <script type='module'>
   import * as appraiser from './src/appraiser.js'
   appraiser.setup()

@@ -14,7 +14,8 @@ class Property{
     this.item=item
     item.properties.push(this)
     this.view=PROPERTY.cloneNode(true)
-    this.view.querySelector('.value').onkeyup=()=>appraiser.update()
+    let value=this.view.querySelector('.value')
+    value.onkeyup=()=>appraiser.update()
     this.view.querySelector('.priority').onchange=()=>appraiser.update()
     let s=this.view.querySelector('select')
     s.onchange=()=>appraiser.update()
@@ -28,6 +29,7 @@ class Property{
     this.view.querySelector('.remove-property').onclick=()=>this.remove()
     item.view.querySelector('.properties').appendChild(this.view)
     appraiser.update()
+    value.focus()
   }
   
   remove(){
@@ -42,6 +44,7 @@ class Property{
     if(value===false) return false
     let type=this.view.querySelector('.type').value
     let priority=this.view.querySelector('.priority').checked?2:1
+    //console.log(type,this.item.score,value,priority)
     if(type=='multiply') this.item.score*=value*priority
     else if(type=='divide') this.item.score/=value*priority
     else{
@@ -62,7 +65,8 @@ class Item{
     this.view.querySelector('button.remove-item').onclick=()=>this.remove()
     this.view.querySelector('button.add-property').onclick=()=>new Property(this)
     CONTAINER.appendChild(this.view)
-    new Property(this)
+    this.view.querySelector('.name').focus()
+    //new Property(this)
   }
   
   remove(){
@@ -77,8 +81,9 @@ class Item{
         this.score=false
         break
       }
-    this.view.querySelector('.score .value').innerHTML=
-      this.score===false?'?':Math.round(this.score)
+    let score=this.view.querySelector('.score .value')
+    score.innerHTML=this.score===false?'?':
+      Intl.NumberFormat().format(Math.round(this.score))
   }
 }
 

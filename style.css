@@ -26,25 +26,26 @@ body{
 }
 .error{background-color:pink;}
 #items{
-  display:flex;
+  /*display:flex;
   flex-direction:row;
-  flex-wrap:wrap;
+  flex-wrap:wrap;*/
 }
 .item{
   margin:1em;
   padding:1em;
   border:solid black 1px;
   border-radius:1em;
-  width:30%;
+  width:29%;
   display:flex;
   flex-direction:column;
   justify-content:flex-end;
+  float:left;
 }
 .item>*{
 }
 .item .property{
   display:grid;
-  grid-template:100% / auto 30% 50% auto;
+  grid-template:100% / 30% 50% auto auto;
 }
 .item .score{
   font-size:medium;
