@@ -57,19 +57,22 @@ class Property{
 }
 
 class Item{
-  constructor(){
+  constructor(container=CONTAINER,register=true){
+    if(register) items.push(this)
     this.properties=[]
+    this.skills=[]
     this.score='?'
-    items.push(this)
     this.view=ITEM.cloneNode(true)
     this.view.querySelector('button.remove-item').onclick=()=>this.remove()
     this.view.querySelector('button.add-property').onclick=()=>new Property(this)
-    CONTAINER.appendChild(this.view)
+    this.view.querySelector('button.add-skill').onclick=()=>new Skill(this)
+    container.appendChild(this.view)
     this.view.querySelector('.name').focus()
     //new Property(this)
   }
   
   remove(){
+    if(!window.confirm('Are you sure?')) return
     items.splice(items.indexOf(this),1)
     this.view.remove()
   }
@@ -81,9 +84,31 @@ class Item{
         this.score=false
         break
       }
-    let score=this.view.querySelector('.score .value')
+    for(let s of this.skills){
+      s.update()
+      if(this.score!==false&&s.score!==false)
+        this.score+=s.score
+    }
+    let score=this.view.querySelector(':scope > .score .value')
     score.innerHTML=this.score===false?'?':
       Intl.NumberFormat().format(Math.round(this.score))
+  }
+}
+
+class Skill extends Item{
+  constructor(item){
+    super(item.view.querySelector('.skills'),false)
+    this.item=item
+    item.skills.push(this)
+    this.view.classList.add('skill')
+    this.view.querySelector('.add-skill').remove()
+  }
+  
+  remove(){
+    let s=this.item.skills
+    s.splice(s.indexOf(this),1)
+    this.view.remove()
+    this.item.update()
   }
 }
 

@@ -53,3 +53,15 @@ body{
   text-align:right;
   font-weight:bold;
 }
+.item .skills:not(:empty){
+  margin:1em 0em;
+}
+.skill{
+  width:95%;
+  margin:0;
+  border:1px black dashed;
+}
+button#new-item{
+  display:block;
+  clear:both;
+}
