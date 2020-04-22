@@ -1,18 +1,14 @@
 import * as appraiser from './appraiser.js'
 
 const INPUTS=new Map()
-const STACKING=['physical-damage','pierce-damage',
-  'bleed-damage','trauma-damage','fire-damage',
-  'cold-damage','lightning-damage','acid-damage',
-  'vitality-damage','aether-damage','chaos-damage',
-]
+const RATING=document.querySelector('#rating .value')
 
 export var properties=['armor-head','armor-shoulders',
   'armor-chest','armor-arms','armor-legs','armor-feet',
   'armor-other','retaliation-all',
   'offensive-ability-to-dps','defensive-ability-to-health',
   'offensive-ability-%-to-dps','defensive-ability-%-to-health',
-  'crit-chance-%-to-dps','elemental-modifier',
+  'crit-damage-%-to-dps','elemental-modifier',
   'elemental-damage',
 ]
 
@@ -66,7 +62,7 @@ class Character{
     return da&&dahp&&da*dahp/100
   }
   
-  get critchanceptodps(){
+  get critdamageptodps(){
     let cc=this.get('crit-chance')
     let dps=this.get('damage-per-second')
     return cc&&dps&&cc*dps/100
@@ -98,12 +94,24 @@ class Character{
     }
     if(key.indexOf('-modifier')>=0)
       value+=1
-    if(STACKING.indexOf(key)>=0){
-      let attackrate=this.get('attacks-per-second')
-      if(attackrate===false) return false
-      value*=attackrate
-    }
     return value
+  }
+  
+  get rating(){
+    let r=0
+    let oa=this.get('offensive-ability')
+    let oadps=this.offensiveabilitytodps
+    if(!oa||!oadps) return false
+    r+=oa*oadps
+    let da=this.get('defensive-ability')
+    let dahp=this.defensiveabilitytohealth
+    if(!da||!dahp) return false
+    r+=da*dahp
+    let e=this.get('energy')
+    let armor=this.get('armor-rating')
+    if(!e||!armor) return false
+    r+=e+armor
+    return r
   }
 }
 
@@ -120,4 +128,10 @@ export function setup(){
     for(let i of INPUTS.values()) i.value=''
     appraiser.update()
   }
+}
+
+export function update(){
+  let r=character.rating
+  RATING.innerHTML=
+    r?Intl.NumberFormat().format(Math.round(r)):'?'
 }

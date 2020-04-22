@@ -72,7 +72,9 @@ class Item{
   }
   
   remove(){
-    if(!window.confirm('Are you sure?')) return
+    let name=this.view.querySelector('input.name').value
+    let prompt=`Are you sure you want to remove "${name}"?`
+    if(!window.confirm(prompt)) return
     items.splice(items.indexOf(this),1)
     this.view.remove()
   }

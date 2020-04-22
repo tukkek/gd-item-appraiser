@@ -5,6 +5,7 @@ export function update(){
   for(let e of document.querySelectorAll('.error'))
     e.classList.remove('error')
   item.update()
+  character.update()
 }
 
 export function setup(){

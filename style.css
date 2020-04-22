@@ -25,6 +25,11 @@ body{
   width:100%;
 }
 .error{background-color:pink;}
+#rating{
+  margin:1em;
+  font-weight:bold;
+  font-size:large;
+}
 #items{
   /*display:flex;
   flex-direction:row;
@@ -46,6 +51,10 @@ body{
 .item .property{
   display:grid;
   grid-template:100% / 30% 50% auto auto;
+}
+.item .name {
+  font-weight: bold;
+  text-transform: capitalize;
 }
 .item .score{
   font-size:medium;
