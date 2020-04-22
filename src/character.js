@@ -2,6 +2,14 @@ import * as appraiser from './appraiser.js'
 
 const INPUTS=new Map()
 const RATING=document.querySelector('#rating .value')
+/*
+ * Effective HP calculation is shaped as a logarhitmic curve.
+ * However, as a simplification, the value 3 stays within
+ * a ~30% error margin within Grim Dawn's 0-80% resist range,
+ * while averaging to 100% overall. The division by 10
+ * represents all the major resistances in the game.
+ */
+const RESISTFACTOR=3/10
 
 export var properties=['armor-head','armor-shoulders',
   'armor-chest','armor-arms','armor-legs','armor-feet',
@@ -9,7 +17,7 @@ export var properties=['armor-head','armor-shoulders',
   'offensive-ability-to-dps','defensive-ability-to-health',
   'offensive-ability-%-to-dps','defensive-ability-%-to-health',
   'crit-damage-%-to-dps','elemental-modifier',
-  'elemental-damage',
+  'elemental-damage','resistance-%-to-health'
 ]
 
 function clean(name){
@@ -80,6 +88,11 @@ class Character{
     let c=this.get('cold-damage')
     let l=this.get('lightning-damage')
     return f&&c&&l&&f+c+l
+  }
+  
+  get resistanceptohealth(){
+    let h=this.get('health')
+    return h&&RESISTFACTOR*h/100
   }
   
   get(key){
